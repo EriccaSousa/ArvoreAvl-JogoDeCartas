@@ -1,4 +1,4 @@
-#ESTRUTURA DE DADOS - TRABALHO FINAL
+#ESTRUTURA DE DADOS - TRABALHO FINAL#
 
  Implemente a Estrutura de dados árvore AVL (TAD + operações de inserção, remoção, busca – pode ser escolhido qualquer critério de busca, 
  vazia...).
