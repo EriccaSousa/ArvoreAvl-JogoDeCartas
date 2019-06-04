@@ -1,0 +1,41 @@
+
+Regra geral das Rotações:
+	Sempre balanceia o nó "ancestral" mais próximo do nó inserirdo
+
+Rotações Simples:
+	Rotação simples à esquerda (RR):
+		EX.: - duas inserções a direita;
+			 - Giro para esquerda;
+			 - O nó intermediario é escolhido para ser raíz;
+
+	Rotação simples a direita (LL):
+		EX.: - duas inserções a esquerda;
+			 - Giro para a direita;
+			 - O nó intermediário é escolhido para ser raíz;
+
+Outras Rotações:
+	Rotação dupla à esquerda (RL):
+		EX.: - um nó é inserido na sub-árvore da esqueda  e outro na sub-árvore a direita 
+		 	 (em zig-zag);
+			 - Pode ser corrigido com duas rotações simples(LL-RR);
+
+	Rotação dupla à direita:
+		EX.: - um nó é inserido na sub-árvore da direita e outro na sub-árvore a esquerda 
+		     (em zig-zag);
+			 - Pode ser corrigido com duas rotações simples(LL-RR);
+
+-------------------------------------------------------------------------------------------
+
+Atributo ALTURA:
+	- O campo ALTURA adicionado dentro da estrutura No é utilizado para não precisar ficar percorrendo os nós da arvore para calcular sua altura.
+	- A ALTURA é utilizada para calcular o fator de balanceamento de cada nó;
+	- ALTURA sempre será atualizada quando feita as operações de INSERÇÃO e REMOÇÃO;
+
+Funções auxiliares:
+	- calculaAlturaNo: recebe um nó como parametro e retorna informação de altura, se não existir nó retirna -1;
+
+	- fatorBalanceamentoNo: retorna a diferença entre a altura do nó da esquerda com o nó da direita, utiliza a função Labs que retorna o valor absoluto;
+
+	- maiorValor: faz comparação entre valores;
+
+

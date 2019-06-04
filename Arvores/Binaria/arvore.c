@@ -89,7 +89,7 @@ void inserir(Arvore *a, int valor){
                     temp = temp->dir;
                     pos = DIREITA;
                 } else if(valor == temp->valor){
-                     printf("Valor j√° existe na √°rvore");
+                     printf("Valor j· existe na ·rvore");
                     free(n);
                     return;
                     }
