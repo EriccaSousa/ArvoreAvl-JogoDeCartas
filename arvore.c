@@ -14,21 +14,21 @@ struct arvore{
     No *raiz;
 };
 
-Arvore* criara(){
+Arvore* criarArvore(){
     Arvore *a = (Arvore*) malloc(sizeof(Arvore));
     a->raiz = NULL;
     return(a);
 }
 
 
-int vaziaa(Arvore *a){
+int vaziaArvore(Arvore *a){
     if(a->raiz == NULL)
         return 1;
     else
         return 0;
 }
 
-int cheiaa(Arvore *a){
+int cheiaArvore(Arvore *a){
     return 0;
 }
 
@@ -61,11 +61,11 @@ void imprimir_no(No *n, int ordem){
     }
 }
 
-void imprimira(Arvore *a, int ordem){
+void imprimirArvore(Arvore *a, int ordem){
     imprimir_no(a->raiz, ordem);
 }
 
-void inserira(Arvore *a, int valor){
+void inserirArvore(Arvore *a, int valor){
     No *temp  = a->raiz;
     No *ant = NULL;
     int pos=0;
@@ -75,7 +75,7 @@ void inserira(Arvore *a, int valor){
     n->esq = NULL;
     n->dir = NULL;
     
-    if(vaziaa(a)){
+    if(vaziaArvore(a)){
         a->raiz = n;
     }else{
         while(temp != NULL){
@@ -98,8 +98,8 @@ void inserira(Arvore *a, int valor){
     }
 }
 
-int removera(Arvore *a, int valor){
-    if(!vaziaa(a)){
+int removerArvore(Arvore *a, int valor){
+    if(!vaziaArvore(a)){
         //percorrendo a árvore com temp
         No *temp = a->raiz;
         No *ant =NULL;
@@ -171,6 +171,6 @@ int removera(Arvore *a, int valor){
     return(0); // quando está vazia retorna 0
 }
 
-void liberara(Arvore *a){
+void liberarArvore(Arvore *a){
     free(a);
 }

@@ -9,21 +9,21 @@ struct lista{
    int qtd_elem;
 };
 
-Lista* criarl(int ord){
+Lista* criarLista(int ord){
    Lista *l = (Lista*) malloc(sizeof(Lista));
    l->qtd_elem = 0;
    return(l);
 }
 
-int cheial(Lista *l){
+int cheiaLista(Lista *l){
    if(l->qtd_elem == N) return 1;
    else return(0);
 }
 
-void inserirl(Lista *l, int valor, int pos){
+void inserirLista(Lista *l, int valor, int pos){
    int i;
-   if(cheial(l)) printf("A lista está cheia");
-   else if(pos > l->qtd_elem || pos<0)              printf("A posição da inserção é inválida");
+   if(cheiaLista(l)) printf("A lista está cheia");
+   else if(pos > l->qtd_elem || pos<0) printf("A posição da inserção é inválida");
         else{
           i=l->qtd_elem;
           while(i>pos){
@@ -36,14 +36,14 @@ void inserirl(Lista *l, int valor, int pos){
         }
 }
 
-int vazial(Lista *l){
-  if(l->qtd_elem ==0) return 1;
+int vaziaLista(Lista *l){
+  if(l->qtd_elem == 0) return 1;
   else return 0;
 }
 
-int removerl(Lista *l, int pos){
+int removerLista(Lista *l, int pos){
    int i=0, valor=0;
-   if(vazial(l)){ printf("A lista está vazia, não é possivel fazer remoção");
+   if(vaziaLista(l)){ printf("A lista está vazia, não é possivel fazer remoção");
     exit(1);
    }else if(pos >= l->qtd_elem || pos<0) { 
            printf("Posição inválida, impossível fazer a remoção"); 
@@ -51,7 +51,7 @@ int removerl(Lista *l, int pos){
          }else{
             valor = l-> v[pos];
  	    
-	    for(i=pos+1;i<l->qtd_elem; i++)
+	    for(i = pos+1; i < l->qtd_elem; i++)
 	       l->v[i-1] = l->v[i];
  	    
 	    l->qtd_elem -= 1;
@@ -59,16 +59,16 @@ int removerl(Lista *l, int pos){
          }
 }
 
-void imprimirl(Lista *l, int pos){
-  if(!vazial(l) && pos >= 0 && pos <l->qtd_elem)
+void imprimirLista(Lista *l, int pos){
+  if(!vaziaLista(l) && pos >= 0 && pos <l->qtd_elem)
     printf("\nO elemento  %d da Lista é  %d", pos, l->v[pos]);
   else printf("Lista vazia ou posição inválida");
 }
 
-int qtd_elem(Lista *l){
+int qtd_elemLista(Lista *l){
   return l->qtd_elem;
 }
 
-void liberarl(Lista *l){
+void liberarLista(Lista *l){
   free(l);
 }

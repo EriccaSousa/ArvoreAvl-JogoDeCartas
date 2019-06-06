@@ -1,17 +1,17 @@
 typedef struct lista Lista;
 
-Lista* criarl();
+Lista* criarLista();
 
-void inserirl(Lista *l, int valor, int pos);
+void inserirLista(Lista *l, int valor, int pos);
 
-int removerl(Lista *l, int pos);
+int removerLista(Lista *l, int pos);
 
-int vazial(Lista *l);
+int vaziaLista(Lista *l);
 
-int cheial(Lista *l);
+int cheiaLista(Lista *l);
 
-void imprimirl(Lista *l, int pos);
+void imprimirLista(Lista *l, int pos);
 
-int qtd_elem(Lista *l);
+int qtd_elemLista(Lista *l);
 
-void liberarl(Lista *l);
+void liberarLista(Lista *l);

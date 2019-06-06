@@ -15,15 +15,15 @@ typedef struct partida{
 }Partida;
 
 Lista* lista_cartas(){
-    Lista *l = criarl();
+    Lista *l = criarLista();
 
     int carta = 1;
 
     for(int i = 1; i < 53; i = i + 4){
-        inserirl(l, carta, i - 1);
-        inserirl(l, carta, i);
-        inserirl(l, carta, i + 1);
-        inserirl(l, carta, i + 2);
+        inserirLista(l, carta, i - 1);
+        inserirLista(l, carta, i);
+        inserirLista(l, carta, i + 1);
+        inserirLista(l, carta, i + 2);
         carta++;
     }
     
@@ -33,7 +33,7 @@ Lista* lista_cartas(){
 Jogador criar_jogador(){
     Jogador jogador;
 
-    jogador.a = criara();
+    jogador.a = criarArvore();
     jogador.vitorias = 0;
     return jogador;
 }
@@ -52,20 +52,22 @@ void jogo(){
     int carta = 0;
     for(int i = 0; i < 10; i++){
         for(int i = 0; i < 3; i++){
-            num = rand() % qtd_elem(l);
-            carta = removerl(l, num);
-            inserira(jog[i].a, carta);
+            num = rand() % qtd_elemLista(l);
+            carta = removerLista(l, num);
+            inserirArvore(jog[i].a, carta);
         }
     }
 
     for(int i = 0; i < 3; i++){
         printf("\nJogador %d: ", i);
-        imprimira(jog[i].a, 1);
+        imprimirArvore(jog[i].a, 1);
     }
 }
 
 int main(){
 
     jogo();
+
+    system("pause");
     return 0;
 }

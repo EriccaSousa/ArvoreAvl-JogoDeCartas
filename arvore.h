@@ -2,16 +2,16 @@ typedef struct arvore Arvore;
 
 typedef struct no No;
 
-Arvore* criara();
+Arvore* criarArvore();
 
-void inserira(Arvore *a, int valor);
+void inserirArvore(Arvore *a, int valor);
 
-int removera(Arvore *a, int valor);
+int removerArvore(Arvore *a, int valor);
 
-int vaziaa(Arvore *a);
+int vaziaArvore(Arvore *a);
 
-int cheiaa(Arvore *a);
+int cheiaArvore(Arvore *a);
 
-void imprimira(Arvore *a, int ordem);
+void imprimirArvore(Arvore *a, int ordem);
 
-void liberara(Arvore *a);
+void liberarArvore(Arvore *a);
