@@ -15,3 +15,5 @@ int cheiaArvore(Arvore *a);
 void imprimirArvore(Arvore *a, int ordem);
 
 void liberarArvore(Arvore *a);
+
+int buscaMenorValor(Arvore *a);

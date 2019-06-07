@@ -62,11 +62,30 @@ void jogo(){
         printf("\nJogador %d: ", i);
         imprimirArvore(jog[i].a, 1);
     }
+
+    int a = buscar_ordenada(jog, 2);
+
+    printf("Busca: %d", a);
 }
 
 int main(){
 
-    jogo();
+    //jogo();
+
+    Arvore *arvore;
+
+    arvore = criarArvore();
+
+    int i = 0, valor = 0;
+
+    for(i = 0; i < 10; i++){
+        printf("Informe o valor: ");
+        scanf("%d", &valor);
+
+        inserirArvore(arvore, valor);
+    }
+
+    imprimirArvore(arvore, 3);
 
     system("pause");
     return 0;

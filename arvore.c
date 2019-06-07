@@ -174,3 +174,20 @@ int removerArvore(Arvore *a, int valor){
 void liberarArvore(Arvore *a){
     free(a);
 }
+
+int buscaMenorValor(Arvore *a) {
+    int maiorValor, valorAtual, valorEsquerda;
+
+    valorAtual = a->raiz->valor;
+
+    maiorValor = valorAtual; /* até encontrar um filho com uma informação maior, o maior que eu tenho é o atual */
+    
+    if (subarvore->esquerda != null) {
+        valorEsquerda = buscaMenorValor(a->esq);
+
+        if (valorEsquerda > maiorValor) {
+            maiorValor = valorEsquerda;
+        }
+    }
+    return maiorValor;
+}
