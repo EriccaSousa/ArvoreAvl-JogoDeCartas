@@ -16,4 +16,4 @@ void imprimirArvore(Arvore *a, int ordem);
 
 void liberarArvore(Arvore *a);
 
-int buscaMenorValor(Arvore *a);
+int busca_menor(Arvore *a);

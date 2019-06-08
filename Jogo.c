@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "arvore.h"
 #include "lista.h"
 
@@ -8,11 +9,6 @@ typedef struct jogador{
     Arvore *a;
     int vitorias;
 }Jogador;
-
-typedef struct partida{
-    int carta;
-    Jogador jog;
-}Partida;
 
 Lista* lista_cartas(){
     Lista *l = criarLista();
@@ -38,6 +34,48 @@ Jogador criar_jogador(){
     return jogador;
 }
 
+void partida(Jogador jog[3]){ 
+    
+    int menor[3] = {0,0,0};
+   
+    for(int y = 0; y < 3; y++){
+        printf("\nJogador %d ", y + 1);
+        menor[y] = busca_menor(jog[y].a);
+        removerArvore(jog[y].a, menor[y]);
+        printf("Jogou a carta: %d", menor[y]);
+    }
+    if((menor[0] > menor[1] && menor[1] >= menor[2]) || (menor[0] > menor[2] && menor[2] >= menor[1])){
+        printf("\nJogador 1 venceu a rodada!");
+        jog[0].vitorias++;
+    }else if((menor[1] > menor[0] && menor[0] >= menor[2]) || (menor[1] > menor[2] && menor[2] >= menor[0])){
+        printf("\nJogador 2 venceu a rodada!");
+        jog[1].vitorias++;
+    }else if((menor[2] > menor[1] && menor[1] >= menor[0]) || (menor[2] > menor[0] && menor[0] >= menor[1])){
+        printf("\nJogador 3 venceu a rodada!");
+        jog[2].vitorias++;
+    }else if(menor[0] == menor[1] && menor[0] > menor[2]){
+        printf("\nJogador 1 e 2 empataram!");
+        jog[0].vitorias++;
+        jog[1].vitorias++;
+    }else if(menor[2] == menor[0] && menor[2] > menor[1]){
+        printf("\nJogador 1 e 3 empataram!");
+        jog[0].vitorias++;
+        jog[2].vitorias++;
+    }else if(menor[1] == menor[2] && menor[1] > menor[0]){
+        printf("\nJogador 2 e 3 empataram!");
+        jog[1].vitorias++;
+        jog[2].vitorias++;
+    }else if(menor[0] == menor[1] == menor[2]){
+        printf("\nTodos empataram!");
+        jog[0].vitorias++;
+        jog[1].vitorias++;
+        jog[2].vitorias++;
+    }
+    
+    return;
+
+}
+
 void jogo(){
 
     Jogador jog[3];
@@ -50,6 +88,7 @@ void jogo(){
     Lista *l = lista_cartas();
     int num = 0;
     int carta = 0;
+    srand(time(NULL));
     for(int i = 0; i < 10; i++){
         for(int i = 0; i < 3; i++){
             num = rand() % qtd_elemLista(l);
@@ -60,18 +99,28 @@ void jogo(){
 
     for(int i = 0; i < 3; i++){
         printf("\nJogador %d: ", i);
-        imprimirArvore(jog[i].a, 1);
+        imprimirArvore(jog[i].a, 2);
     }
+    int menor;
+  
+    for(int i = 0; i < 10; i++){
+        printf("\n ------ Rodada %d ------", i+1);
+        partida(jog);
+    }
+        
+    printf("\n-------- Pontuacao final -------- ");
+    printf("\nJogador 1: %d", jog[0].vitorias);
+    printf("\nJogador 2: %d", jog[1].vitorias);
+    printf("\nJogador 3: %d", jog[2].vitorias);
 
-    int a = buscar_ordenada(jog, 2);
-
-    printf("Busca: %d", a);
+    return;
 }
 
 int main(){
 
-    //jogo();
+    jogo();
 
+ /*
     Arvore *arvore;
 
     arvore = criarArvore();
@@ -87,6 +136,7 @@ int main(){
 
     imprimirArvore(arvore, 3);
 
+    */
     system("pause");
     return 0;
 }

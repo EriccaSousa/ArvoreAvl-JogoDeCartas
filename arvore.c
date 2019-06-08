@@ -175,19 +175,20 @@ void liberarArvore(Arvore *a){
     free(a);
 }
 
-int buscaMenorValor(Arvore *a) {
-    int menorValor, valorAtual, valorEsquerda;
 
-    valorAtual = a->raiz->valor;
-
-    menorValor = valorAtual; /* até encontrar um filho com uma informação menor, o menor que eu tenho é o atual */
-    
-    if (subarvore->esquerda != null) {
-        valorEsquerda = buscaMenorValor(a->esq);
-
-        if (valorEsquerda < menorValor) {
-            menorValor = valorEsquerda;
+int busca_menor(Arvore *a){
+    int menor = a->raiz->valor;
+    No *temp = a->raiz;
+    No *ant = NULL;
+    while(temp!=NULL){
+        if(temp->esq == NULL){
+            menor = temp->valor;
+            break;
         }
+        if(menor > temp->esq->valor)
+            temp = temp->esq;
+        ant = temp;
     }
-    return maiorValor;
+    return menor;
 }
+
