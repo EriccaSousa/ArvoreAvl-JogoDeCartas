@@ -180,7 +180,8 @@ int busca_menor(Arvore *a){
     int menor = a->raiz->valor;
     No *temp = a->raiz;
     No *ant = NULL;
-    while(temp!=NULL){
+
+    while(temp != NULL){
         if(temp->esq == NULL){
             menor = temp->valor;
             break;

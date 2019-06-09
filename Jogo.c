@@ -44,16 +44,18 @@ void partida(Jogador jog[3]){
         removerArvore(jog[y].a, menor[y]);
         printf("Jogou a carta: %d", menor[y]);
     }
-    if((menor[0] > menor[1] && menor[1] >= menor[2]) || (menor[0] > menor[2] && menor[2] >= menor[1])){
+    if((menor[0] > menor[1] && menor[0] > menor[2])){
         printf("\nJogador 1 venceu a rodada!");
         jog[0].vitorias++;
-    }else if((menor[1] > menor[0] && menor[0] >= menor[2]) || (menor[1] > menor[2] && menor[2] >= menor[0])){
+    }else if((menor[1] > menor[0] && menor[1] > menor[2])){
         printf("\nJogador 2 venceu a rodada!");
         jog[1].vitorias++;
-    }else if((menor[2] > menor[1] && menor[1] >= menor[0]) || (menor[2] > menor[0] && menor[0] >= menor[1])){
+    }else if((menor[2] > menor[1] && menor[2] > menor[0])){
         printf("\nJogador 3 venceu a rodada!");
         jog[2].vitorias++;
-    }else if(menor[0] == menor[1] && menor[0] > menor[2]){
+    }
+    //Casos de empate:
+    else if(menor[0] == menor[1] && menor[0] > menor[2]){
         printf("\nJogador 1 e 2 empataram!");
         jog[0].vitorias++;
         jog[1].vitorias++;
