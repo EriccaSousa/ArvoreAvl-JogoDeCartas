@@ -37,13 +37,14 @@ Jogador criar_jogador(){
 void partida(Jogador jog[3]){ 
     
     int menor[3] = {0,0,0};
-   
+    
     for(int y = 0; y < 3; y++){
         printf("\nJogador %d ", y + 1);
         menor[y] = busca_menor(jog[y].a);
         removerArvore(jog[y].a, menor[y]);
         printf("Jogou a carta: %d", menor[y]);
     }
+
     if((menor[0] > menor[1] && menor[0] > menor[2])){
         printf("\nJogador 1 venceu a rodada!");
         jog[0].vitorias++;
@@ -114,6 +115,31 @@ void jogo(){
     printf("\nJogador 1: %d", jog[0].vitorias);
     printf("\nJogador 2: %d", jog[1].vitorias);
     printf("\nJogador 3: %d", jog[2].vitorias);
+
+    //casos de empate:
+    if(jog[0].vitorias == jog[1].vitorias == jog[2].vitorias){
+        printf("\nA partida terminou empatada!\n");
+    }
+    if(jog[0].vitorias == jog[1].vitorias){
+        printf("\nJogadores 1 e 2 empataram!!\n");
+    }
+    if(jog[0].vitorias == jog[2].vitorias){
+        printf("\nJogadores 1 e 3 empataram!!\n");
+    }
+    if(jog[1].vitorias == jog[2].vitorias){
+        printf("\nJogadores 2 e 3 empataram!!\n");
+    }
+    //Casos de vitoria:
+    if((jog[0].vitorias > jog[1].vitorias) && (jog[0].vitorias > jog[2].vitorias)){
+        printf("\nParabens Jogador 1, voce venceu!!\n");
+    }
+    if((jog[1].vitorias > jog[0].vitorias) && (jog[1].vitorias > jog[2].vitorias)){
+        printf("\nParabens Jogador 2, voce venceu!!\n");
+    }
+    if((jog[2].vitorias > jog[1].vitorias) && (jog[2].vitorias > jog[0].vitorias)){
+        printf("\nParabens Jogador 3, voce venceu!!\n");
+    }
+    printf("\n");
 
     return;
 }
