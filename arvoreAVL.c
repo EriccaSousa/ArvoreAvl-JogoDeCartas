@@ -199,7 +199,11 @@ int altura(No *no) {
   int alturaEsq = altura(no->esq);  
   int alturaDir = altura(no->dir);
 
-  return alturaEsq > alturaDir ? alturaEsq + 1 : alturaDir + 1;
+  if(alturaEsq == alturaDir){
+      return -1;
+  }else if(alturaEsq > alturaDir){
+      return alturaEsq + 1;
+  }else return alturaDir + 1;
 }
 
  
