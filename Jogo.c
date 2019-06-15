@@ -28,7 +28,7 @@ Lista* lista_cartas(){
 
 Jogador criar_jogador(){
     Jogador jogador;
-
+    
     jogador.a = criarArvore();
     jogador.vitorias = 0;
     return jogador;

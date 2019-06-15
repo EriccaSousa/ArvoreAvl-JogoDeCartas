@@ -17,3 +17,9 @@ void imprimirArvore(Arvore *a, int ordem);
 void liberarArvore(Arvore *a);
 
 int busca_menor(Arvore *a);
+
+int calcularAltura(No *no, Arvore *a);
+
+int calcularBalanceamento(Arvore *a);
+
+int maior(int x, int y);

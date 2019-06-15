@@ -8,6 +8,7 @@ struct no{
     int valor;
     No *esq;
     No *dir;
+    int altura;//Altura da sub-arvore;
 };
 
 struct arvore{
@@ -193,3 +194,23 @@ int busca_menor(Arvore *a){
     return menor;
 }
 
+int calcularAltura(No *no, Arvore *a){
+    no = a->raiz;
+
+    if(no == NULL){
+        return -1;
+    }else{
+        no->altura;
+    }
+}
+
+int calcularBalanceamento(Arvore *a){
+    No *no = a->raiz;
+
+   return labs(calcularAltura(no->esq, a) - calcularAltura(no->dir, a));
+}
+
+int maior(int x, int y){
+    if(x > y) return x;
+    else return y;
+}
