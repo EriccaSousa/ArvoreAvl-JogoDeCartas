@@ -204,7 +204,9 @@ int altura(No *no) {
 
  
 int calcularBalanceamento(Arvore *a){
-   return (altura(a->raiz->esq) - altura(a->raiz->dir));
+    int fatorBalanceamento = (altura(a->raiz->esq) - altura(a->raiz->dir));
+
+    return fatorBalanceamento;
 }
 
 int maior(int x, int y){
