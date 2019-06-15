@@ -16,7 +16,7 @@ int main(){
     }
     
     printf("\nArvore informada: ");
-        imprimirArvore(a, 2);
+        imprimirArvore(a, 1);
 
     printf("\nFator de balanceamento: %d\n", calcularBalanceamento(a));
 

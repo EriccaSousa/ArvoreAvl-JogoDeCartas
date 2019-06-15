@@ -183,10 +183,9 @@ int busca_menor(Arvore *a){
     No *ant = NULL;
 
     while(temp != NULL){
-        if(temp->esq == NULL){
-            menor = temp->valor;
-            break;
-        }
+        menor = temp->valor;
+        break;
+
         if(menor > temp->esq->valor)
             temp = temp->esq;
         ant = temp;
@@ -194,23 +193,55 @@ int busca_menor(Arvore *a){
     return menor;
 }
 
-int calcularAltura(No *no, Arvore *a){
-    no = a->raiz;
+int altura(No *no) {
+  if (no == NULL) return 0;
 
-    if(no == NULL){
-        return -1;
-    }else{
-        no->altura;
-    }
+  int alturaEsq = altura(no->esq);  
+  int alturaDir = altura(no->dir);
+
+  return alturaEsq > alturaDir ? alturaEsq + 1 : alturaDir + 1;
 }
 
+ 
 int calcularBalanceamento(Arvore *a){
-    No *no = a->raiz;
-
-   return labs(calcularAltura(no->esq, a) - calcularAltura(no->dir, a));
+   return (altura(a->raiz->esq) - altura(a->raiz->dir));
 }
 
 int maior(int x, int y){
     if(x > y) return x;
     else return y;
 }
+
+/* 
+void rotacaoLL(Arvore *a){
+    No *no = a->raiz->esq;
+    a->raiz->esq = no->dir;
+    no->dir = a->raiz;
+
+    a->raiz->altura = maior(calcularAltura(a->raiz->esq, a), calcularAltura(a->raiz->dir, a)) + 1;
+    no->altura = maior(calcularAltura(no->dir, a), a->raiz->altura) + 1;
+
+    a->raiz = no;
+}
+
+void rotacaoRR(Arvore *a){
+    No *no = a->raiz->dir;
+    a->raiz->dir = no->esq;
+    no->esq = a->raiz;
+
+    a->raiz->altura = maior(calcularAltura(a->raiz->esq, a), calcularAltura(a->raiz->dir, a)) + 1;
+    no->altura = maior(calcularAltura(no->dir, a), a->raiz->altura) + 1;
+
+    a->raiz = no;
+}
+
+void rotacaoLR(Arvore *a){
+    rotacaoRR(a->raiz->esq);
+    rotacaoLL(a->raiz);
+}
+
+void rotacaoRL(Arvore *a){
+    rotacaoLL(a->raiz->dir);
+    rotacaoRR(a->raiz);
+}
+*/
