@@ -18,8 +18,16 @@ void liberarArvore(Arvore *a);
 
 int busca_menor(Arvore *a);
 
+int altura(No *no);
+
 int calcularBalanceamento(Arvore *a);
 
 int maior(int x, int y);
 
-int altura(No *no);
+void rotacaoLL(Arvore *a);
+
+void rotacaoRR(Arvore *a);
+
+void rotacaoLR(Arvore *a);
+
+void rotacaoRL(Arvore *a);
