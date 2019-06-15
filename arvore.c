@@ -184,15 +184,22 @@ int busca_menor(Arvore *a){
     if(vaziaArvore(a)){
         return -1;
     }
+<<<<<<< HEAD
+    while(temp->esq != NULL){
+        /*/if(temp->esq == NULL){
+=======
     while(temp != NULL){
         //if(temp->esq == NULL){
+>>>>>>> 610da7607bbdf0189adbe3e7a417a81958ee1a0a
             menor = temp->valor;
             break;
         //}
         if(menor > temp->esq->valor)
             temp = temp->esq;
-        ant = temp;
+        */
+        temp = temp->esq;
     }
+    menor = temp->valor;
     return menor;
 }
 
