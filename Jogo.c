@@ -8,6 +8,7 @@
 typedef struct jogador{
     Arvore *a;
     int vitorias;
+    int vitorias_partidas;
 }Jogador;
 
 Lista* lista_cartas(){
@@ -79,14 +80,7 @@ void partida(Jogador jog[3]){
 
 }
 
-void jogo(){
-
-    Jogador jog[3];
-
-    printf("teste");
-    for(int i = 0; i < 3; i++){
-        jog[i] = criar_jogador();
-    }
+void jogo(Jogador jog[3]){
 
     Lista *l = lista_cartas();
     int num = 0;
@@ -104,8 +98,6 @@ void jogo(){
         printf("\nJogador %d: ", i);
         imprimirArvore(jog[i].a, 2);
     }
-    int menor;
-  
     for(int i = 0; i < 10; i++){
         printf("\n ------ Rodada %d ------", i+1);
         partida(jog);
@@ -145,8 +137,19 @@ void jogo(){
 }
 
 int main(){
+    
+    Jogador jog[3];
 
-    jogo();
+    printf("teste");
+    for(int i = 0; i < 3; i++){
+        jog[i] = criar_jogador();
+    }
+
+    printf("\nDigite a quantidade de partidas: ");
+    int qtd;
+    scanf("%d", qtd);
+    for(int i = 0; i < qtd; i++)
+    jogo(jog);
 
  /*
     Arvore *arvore;
