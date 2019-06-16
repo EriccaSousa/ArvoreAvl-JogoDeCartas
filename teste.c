@@ -13,11 +13,10 @@ int main(){
         scanf("%d", &valor);
 
         inserirArvore(a, valor);
-        printf("\nFator de balanceamento: %d\n", calcularBalanceamento(a));
     }
     
     printf("\nArvore informada: ");
-        imprimirArvore(a, 1);
+        imprimirArvore(a, 3);
 
     system("pause");
     return 0;

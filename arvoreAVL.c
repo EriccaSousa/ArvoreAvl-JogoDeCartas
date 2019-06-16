@@ -8,7 +8,7 @@ struct no{
     int valor;
     No *esq;
     No *dir;
-    int fatorBal;//Altura da sub-arvore;
+    int fatorBal;//altura da sub-arvore;
 };
 
 struct arvore{
@@ -69,7 +69,7 @@ void imprimirArvore(Arvore *a, int ordem){
 void inserirArvore(Arvore *a, int valor){
     No *temp  = a->raiz;
     No *ant = NULL;
-    No *aux = NULL;
+    No *aux = a->raiz;
     int verifica = 0;
     int pos=0;
     
@@ -83,20 +83,15 @@ void inserirArvore(Arvore *a, int valor){
         a->raiz = n;
     }else{
         while(temp != NULL){
-            if(verifica == 1)
-                aux = ant;
             if(valor <= temp->valor){
                 ant = temp;
                 temp = temp->esq;
                 pos = ESQUERDA;
-                verifica = 1;
             }else{
                 if(valor >= temp->valor){
                     ant = temp;
                     temp = temp->dir;
                     pos = DIREITA;
-                    verifica = 1;
-
                 } 
             }
             
@@ -109,6 +104,7 @@ void inserirArvore(Arvore *a, int valor){
                     aux = rotacaoRR(aux);
                 else
                     aux = rotacaoLR(aux);
+                printf("\nAqui!!");
         }else if(pos == DIREITA){
             ant->dir = n;
             if(altura(aux->dir) - altura(aux->esq) == 2)
@@ -116,7 +112,9 @@ void inserirArvore(Arvore *a, int valor){
                     aux = rotacaoLL(aux);
                 else
                     ant = rotacaoRL(aux);
+                printf("\nAqui2!!");
         } 
+        aux->fatorBal = maior(altura(aux->dir), altura(aux->esq));
     }
 }
 
@@ -256,7 +254,7 @@ No *rotacaoRR(No *no){
 
     no->fatorBal = (maior(altura(no->esq), altura(no->dir)) + 1);
     aux->fatorBal = (maior(altura(no->esq), no->fatorBal) + 1);
-
+    printf("\n ---- Rotacionou RR ---- \n");
     return aux;
 }
 
@@ -268,6 +266,7 @@ No *rotacaoLL(No *no){
 
     no->fatorBal = (maior(altura(no->esq), altura(no->dir)) + 1);
     aux->fatorBal = (maior(altura(no->dir), no->fatorBal) + 1);
+        printf("\n ---- Rotacionou LL ---- \n");
 
     return aux;
 }
