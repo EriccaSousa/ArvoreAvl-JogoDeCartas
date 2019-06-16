@@ -24,10 +24,10 @@ int calcularBalanceamento(Arvore *a);
 
 int maior(int x, int y);
 
-void rotacaoLL(Arvore *a);
+No *rotacaoLL(No *no);
 
-void rotacaoRR(Arvore *a);
+No *rotacaoRR(No *no);
 
-void rotacaoLR(Arvore *a);
+No *rotacaoLR(No *no);
 
-void rotacaoRL(Arvore *a);
+No *rotacaoRL(No *no);

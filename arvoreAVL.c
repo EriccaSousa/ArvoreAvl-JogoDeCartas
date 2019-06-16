@@ -8,7 +8,7 @@ struct no{
     int valor;
     No *esq;
     No *dir;
-    int fatorBalanceamento;//Altura da sub-arvore;
+    int fatorBal;//Altura da sub-arvore;
 };
 
 struct arvore{
@@ -193,6 +193,7 @@ int busca_menor(Arvore *a){
     return menor;
 }
 
+
 int altura(No *no) {
   if (no == NULL) return -1;
 
@@ -206,11 +207,19 @@ int altura(No *no) {
   }else return alturaDir + 1;
 }
 
- 
-int calcularBalanceamento(Arvore *a){
-    a->raiz->fatorBalanceamento = (altura(a->raiz->esq) - altura(a->raiz->dir));
 
-    return a->raiz->fatorBalanceamento;
+/* 
+int altura(No *no){
+    if(!no) return -1;
+
+    return(no->fatorBal);
+}
+*/
+
+int calcularBalanceamento(Arvore *a){
+    a->raiz->fatorBal = (altura(a->raiz->esq) - altura(a->raiz->dir));
+
+    return a->raiz->fatorBal;
 }
 
 int maior(int x, int y){
@@ -218,59 +227,39 @@ int maior(int x, int y){
     else return y;
 }
 
+No *rotacaoRR(No *no){
+    No *aux = no->esq;
+
+    no->esq = aux->dir;
+    aux->dir = no;
+
+    no->fatorBal = (maior(altura(no->esq), altura(no->dir)) + 1);
+    aux->fatorBal = (maior(altura(no->esq), no->fatorBal) + 1);
+
+    return aux;
+}
+
+No *rotacaoLL(No *no){
+    No *aux = no->dir;
+
+    no->dir = aux->esq;
+    aux->esq = no;
+
+    no->fatorBal = (maior(altura(no->esq), altura(no->dir)) + 1);
+    aux->fatorBal = (maior(altura(no->dir), no->fatorBal) + 1);
+
+    return aux;
+}
+
+No *rotacaoLR(No *no){
+    no->esq = rotacaoLL(no->esq);
+
+    return(rotacaoRR(no));
+}
+
+No *rotacaoRL(No *no){
+    no->dir = rotacaoRR(no->dir);
+
+    return(rotacaoLL(no));
+}
  
-void rotacaoLL(Arvore *a){
-    No *no = a->raiz;
-    
-    No *aux_1 = no->dir;
-    No *aux_2 = aux_1->esq;
-
-    aux_1->esq = no;
-    no->dir = aux_2;
-
-    no = aux_1;
-}
-
-void rotacaoRR(Arvore *a){
-    No *no = a->raiz;
-
-    No *aux_1 = no->esq;
-    No *aux_2 = aux_1->dir;
-
-    aux_1->dir = no;
-    no->esq = aux_2;
-
-    no = aux_1;
-}
-
-void rotacaoLR(Arvore *a){
-    rotacaoLL(a->raiz->esq);
-    rotacaoRR(a);
-}
-
-void rotacaoRL(Arvore *a){
-    rotacaoRR(a->raiz->dir);
-    rotacaoLL(a);
-}
-/* 
-void rotacaoRR(Arvore *a){
-    No *no = a->raiz->dir;
-    a->raiz->dir = no->esq;
-    no->esq = a->raiz;
-
-    a->raiz->altura = maior(calcularAltura(a->raiz->esq), calcularAltura(a->raiz->dir)) + 1;
-    no->altura = maior(calcularAltura(no->dir), a->raiz->altura) + 1;
-
-    a->raiz = no;
-}
-
-void rotacaoLR(Arvore *a){
-    rotacaoRR(a->raiz->esq);
-    rotacaoLL(a->raiz);
-}
-
-void rotacaoRL(Arvore *a){
-    rotacaoLL(a->raiz->dir);
-    rotacaoRR(a->raiz);
-}
-*/
