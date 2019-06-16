@@ -8,17 +8,16 @@ int main(){
     Arvore *a;
     a = criarArvore();
 
-    for(i = 0; i < 10; i++){
+    for(i = 1; i < 10; i++){
         printf("Informe um valor: ");
         scanf("%d", &valor);
 
         inserirArvore(a, valor);
+         printf("\nFator de balanceamento: %d\n", calcularBalanceamento(a));
     }
     
     printf("\nArvore informada: ");
         imprimirArvore(a, 1);
-
-    printf("\nFator de balanceamento: %d\n", calcularBalanceamento(a));
 
     system("pause");
     return 0;

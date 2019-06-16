@@ -8,7 +8,7 @@ struct no{
     int valor;
     No *esq;
     No *dir;
-    int altura;//Altura da sub-arvore;
+    int fatorBalanceamento;//Altura da sub-arvore;
 };
 
 struct arvore{
@@ -208,11 +208,11 @@ int altura(No *no) {
 
  
 int calcularBalanceamento(Arvore *a){
-    int fatorBalanceamento = (altura(a->raiz->esq) - altura(a->raiz->dir));
+    a->raiz->fatorBalanceamento = (altura(a->raiz->esq) - altura(a->raiz->dir));
 
-    return fatorBalanceamento;
+    return a->raiz->fatorBalanceamento;
 }
-/* 
+
 int maior(int x, int y){
     if(x > y) return x;
     else return y;
@@ -220,16 +220,39 @@ int maior(int x, int y){
 
  
 void rotacaoLL(Arvore *a){
-    No *no = a->raiz->esq;
-    a->raiz->esq = no->dir;
-    no->dir = a->raiz;
+    No *no = a->raiz;
+    
+    No *aux_1 = no->dir;
+    No *aux_2 = aux_1->esq;
 
-    a->raiz->altura = maior(altura(a->raiz->esq, altura(a->raiz->dir)) + 1;
-    no->altura = maior(calcularAltura(no->dir), a->raiz->altura) + 1;
+    aux_1->esq = no;
+    no->dir = aux_2;
 
-    a->raiz = no;
+    no = aux_1;
 }
 
+void rotacaoRR(Arvore *a){
+    No *no = a->raiz;
+
+    No *aux_1 = no->esq;
+    No *aux_2 = aux_1->dir;
+
+    aux_1->dir = no;
+    no->esq = aux_2;
+
+    no = aux_1;
+}
+
+void rotacaoLR(Arvore *a){
+    rotacaoLL(a->raiz->esq);
+    rotacaoRR(a);
+}
+
+void rotacaoRL(Arvore *a){
+    rotacaoRR(a->raiz->dir);
+    rotacaoLL(a);
+}
+/* 
 void rotacaoRR(Arvore *a){
     No *no = a->raiz->dir;
     a->raiz->dir = no->esq;

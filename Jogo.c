@@ -82,20 +82,24 @@ void partida(Jogador jog[3]){
 
 void jogo(Jogador jog[3]){
 
-    Lista *l = lista_cartas();
     int num = 0;
     int carta = 0;
+
+    Lista *l = lista_cartas();
+    
     srand(time(NULL));
     for(int i = 0; i < 10; i++){
         for(int i = 0; i < 3; i++){
             num = rand() % qtd_elemLista(l);
             carta = removerLista(l, num);
+
             inserirArvore(jog[i].a, carta);
         }
     }
 
     for(int i = 0; i < 3; i++){
         printf("\nJogador %d: ", i);
+        
         imprimirArvore(jog[i].a, 2);
     }
     for(int i = 0; i < 10; i++){
@@ -109,7 +113,7 @@ void jogo(Jogador jog[3]){
     printf("\nJogador 3: %d", jog[2].vitorias);
 
     //casos de empate:
-    if(jog[0].vitorias == jog[1].vitorias == jog[2].vitorias){
+    if((jog[0].vitorias == jog[1].vitorias) && (jog[0].vitorias == jog[2].vitorias) && (jog[1].vitorias == jog[2].vitorias)) {
         printf("\nA partida terminou empatada!\n");
     }
     if(jog[0].vitorias == jog[1].vitorias){
@@ -138,6 +142,7 @@ void jogo(Jogador jog[3]){
 
 int main(){
     
+    int qtd = 0;
     Jogador jog[3];
 
     printf("teste");
@@ -146,28 +151,13 @@ int main(){
     }
 
     printf("\nDigite a quantidade de partidas: ");
-    int qtd;
-    scanf("%d", qtd);
-    for(int i = 0; i < qtd; i++)
-    jogo(jog);
+    scanf("%d", &qtd);
 
- /*
-    Arvore *arvore;
-
-    arvore = criarArvore();
-
-    int i = 0, valor = 0;
-
-    for(i = 0; i < 10; i++){
-        printf("Informe o valor: ");
-        scanf("%d", &valor);
-
-        inserirArvore(arvore, valor);
+    for(int i = 0; i < qtd; i++){
+        printf("\n\nPARTIDA %d\n", i + 1);
+        jogo(jog);
     }
 
-    imprimirArvore(arvore, 3);
-
-    */
     system("pause");
     return 0;
 }
