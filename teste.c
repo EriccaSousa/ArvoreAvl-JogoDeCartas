@@ -16,7 +16,7 @@ int main(){
     }
     
     printf("\nArvore informada: ");
-        imprimirArvore(a, 3);
+        imprimirArvore(a, 2);
 
     system("pause");
     return 0;

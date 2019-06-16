@@ -99,20 +99,43 @@ void inserirArvore(Arvore *a, int valor){
         
         if(pos == ESQUERDA){
             ant->esq = n;
-            if(altura(aux->esq) - altura(aux->dir) == 2)
-                if(valor < ant->esq->valor)
-                    aux = rotacaoRR(aux);
-                else
-                    aux = rotacaoLR(aux);
+            int a = altura(aux->esq);
+            int b = altura(aux->dir);
+            int alt = a - b;
+            printf("diferenca da arvore: %d, %d, %d ", alt, a, b);
+            if(altura(aux->esq) - altura(aux->dir) == 2){
                 printf("\nAqui!!");
+
+                if(valor < aux->esq->valor){
+                    printf("\nAqui2!!");
+
+                    aux = rotacaoRR(aux);
+                }else{
+                    printf("\nAqui3!!");
+
+                    aux = rotacaoLR(aux);
+
+                }
+
+            }   
         }else if(pos == DIREITA){
             ant->dir = n;
-            if(altura(aux->dir) - altura(aux->esq) == 2)
-                if(valor > aux->dir->valor)
+            int alt = altura(aux->dir) - altura(aux->esq);
+                        printf("diferenca da arvore: %d ", alt);
+
+            if(altura(aux->dir) - altura(aux->esq) == 2){
+                printf("\nAqui4");
+                if(valor > aux->dir->valor){
+                    printf("\nAqui5!!");
+
                     aux = rotacaoLL(aux);
-                else
+                
+                }else{
+                    printf("\nAqui6!!");
                     ant = rotacaoRL(aux);
+                }
                 printf("\nAqui2!!");
+            }
         } 
         aux->fatorBal = maior(altura(aux->dir), altura(aux->esq));
     }
@@ -247,6 +270,8 @@ int maior(int x, int y){
 }
 
 No *rotacaoRR(No *no){
+    printf("\n ---- Rotacionou RR ---- \n");
+
     No *aux = no->esq;
 
     no->esq = aux->dir;
@@ -254,11 +279,12 @@ No *rotacaoRR(No *no){
 
     no->fatorBal = (maior(altura(no->esq), altura(no->dir)) + 1);
     aux->fatorBal = (maior(altura(no->esq), no->fatorBal) + 1);
-    printf("\n ---- Rotacionou RR ---- \n");
     return aux;
 }
 
 No *rotacaoLL(No *no){
+        printf("\n ---- Rotacionou LL ---- \n");
+
     No *aux = no->dir;
 
     no->dir = aux->esq;
@@ -266,18 +292,21 @@ No *rotacaoLL(No *no){
 
     no->fatorBal = (maior(altura(no->esq), altura(no->dir)) + 1);
     aux->fatorBal = (maior(altura(no->dir), no->fatorBal) + 1);
-        printf("\n ---- Rotacionou LL ---- \n");
 
     return aux;
 }
 
 No *rotacaoLR(No *no){
+        printf("\n ---- Rotacionou LR ---- \n");
+
     no->esq = rotacaoLL(no->esq);
 
     return(rotacaoRR(no));
 }
 
 No *rotacaoRL(No *no){
+            printf("\n ---- Rotacionou RL ---- \n");
+
     no->dir = rotacaoRR(no->dir);
 
     return(rotacaoLL(no));
