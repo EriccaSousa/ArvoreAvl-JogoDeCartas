@@ -115,25 +115,38 @@ void jogo(Jogador jog[3]){
     //casos de empate:
     if((jog[0].vitorias == jog[1].vitorias) && (jog[0].vitorias == jog[2].vitorias) && (jog[1].vitorias == jog[2].vitorias)) {
         printf("\nA partida terminou empatada!\n");
+        jog[0].vitorias_partidas++;
+        jog[1].vitorias_partidas++;
+        jog[2].vitorias_partidas++;
+
     }
     if(jog[0].vitorias == jog[1].vitorias){
         printf("\nJogadores 1 e 2 empataram!!\n");
+        jog[0].vitorias_partidas++;
+        jog[1].vitorias_partidas++;
     }
     if(jog[0].vitorias == jog[2].vitorias){
-        printf("\nJogadores 1 e 3 empataram!!\n");
+        printf("\nJogadores 1 e 3 empataram!!\n"); 
+        jog[0].vitorias_partidas++;
+        jog[2].vitorias_partidas++;
     }
     if(jog[1].vitorias == jog[2].vitorias){
         printf("\nJogadores 2 e 3 empataram!!\n");
+        jog[1].vitorias_partidas++;
+        jog[2].vitorias_partidas++;
     }
     //Casos de vitoria:
     if((jog[0].vitorias > jog[1].vitorias) && (jog[0].vitorias > jog[2].vitorias)){
         printf("\nParabens Jogador 1, voce venceu!!\n");
+        jog[0].vitorias_partidas++;
     }
     if((jog[1].vitorias > jog[0].vitorias) && (jog[1].vitorias > jog[2].vitorias)){
         printf("\nParabens Jogador 2, voce venceu!!\n");
+        jog[1].vitorias_partidas++;
     }
     if((jog[2].vitorias > jog[1].vitorias) && (jog[2].vitorias > jog[0].vitorias)){
         printf("\nParabens Jogador 3, voce venceu!!\n");
+        jog[2].vitorias_partidas++;
     }
     printf("\n");
 
