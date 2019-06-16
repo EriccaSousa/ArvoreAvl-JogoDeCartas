@@ -69,33 +69,54 @@ void imprimirArvore(Arvore *a, int ordem){
 void inserirArvore(Arvore *a, int valor){
     No *temp  = a->raiz;
     No *ant = NULL;
+    No *aux = NULL;
+    int verifica = 0;
     int pos=0;
     
     No *n = (No*) malloc(sizeof(No));
     n->valor = valor;
     n->esq = NULL;
     n->dir = NULL;
+    n->fatorBal = 0;
     
     if(vaziaArvore(a)){
         a->raiz = n;
     }else{
         while(temp != NULL){
+            if(verifica == 1)
+                aux = ant;
             if(valor <= temp->valor){
                 ant = temp;
                 temp = temp->esq;
                 pos = ESQUERDA;
+                verifica = 1;
             }else{
                 if(valor >= temp->valor){
                     ant = temp;
                     temp = temp->dir;
                     pos = DIREITA;
+                    verifica = 1;
+
                 } 
             }
+            
         }
         
         if(pos == ESQUERDA){
             ant->esq = n;
-        }else if(pos == DIREITA) ant->dir = n;
+            if(altura(aux->esq) - altura(aux->dir) == 2)
+                if(valor < ant->esq->valor)
+                    aux = rotacaoRR(aux);
+                else
+                    aux = rotacaoLR(aux);
+        }else if(pos == DIREITA){
+            ant->dir = n;
+            if(altura(aux->dir) - altura(aux->esq) == 2)
+                if(valor > aux->dir->valor)
+                    aux = rotacaoLL(aux);
+                else
+                    ant = rotacaoRL(aux);
+        } 
     }
 }
 
@@ -193,7 +214,7 @@ int busca_menor(Arvore *a){
     return menor;
 }
 
-
+/* 
 int altura(No *no) {
   if (no == NULL) return -1;
 
@@ -205,22 +226,22 @@ int altura(No *no) {
   }else if(alturaEsq > alturaDir){
       return alturaEsq + 1;
   }else return alturaDir + 1;
-}
+}*/
 
 
-/* 
+
 int altura(No *no){
-    if(!no) return -1;
-
+    if(!no) 
+        return -1;
     return(no->fatorBal);
 }
-*/
 
+/* 
 int calcularBalanceamento(Arvore *a){
     a->raiz->fatorBal = (altura(a->raiz->esq) - altura(a->raiz->dir));
 
     return a->raiz->fatorBal;
-}
+}*/
 
 int maior(int x, int y){
     if(x > y) return x;
