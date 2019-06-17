@@ -29,20 +29,21 @@ Lista* lista_cartas(){
 
 Jogador criar_jogador(){
     Jogador jogador;
-    
+
     jogador.no = NULL;
     jogador.vitorias = 0;
+    jogador.vitorias_partidas = 0;
+
     return jogador;
 }
 
 void partida(Jogador jog[3]){ 
     
     int menor[3] = {0,0,0};
-    
     for(int y = 0; y < 3; y++){
         printf("\nJogador %d ", y + 1);
         menor[y] = busca_menor(jog[y].no);
-        removerArvore(jog[y].no, menor[y]);
+        jog[y].no = removerArvore(jog[y].no, menor[y]);
         printf("Jogou a carta: %d", menor[y]);
     }
 
@@ -86,14 +87,15 @@ void jogo(Jogador jog[3]){
     int carta = 0;
 
     Lista *l = lista_cartas();
-    
+    No *aux = NULL;
+
     srand(time(NULL));
     for(int i = 0; i < 10; i++){
+
         for(int i = 0; i < 3; i++){
             num = rand() % qtd_elemLista(l);
             carta = removerLista(l, num);
-
-            inserirArvore(jog[i].no, carta);
+            insere(&jog[i].no, carta);
         }
     }
 

@@ -76,6 +76,9 @@ int noRaiz(No *n){
     return n->valor;
 }
 
+void insere(No **no, int valor){
+    *no = inserirArvore(*no, valor);
+}
 
 No* inserirArvore(No *no, int valor){
 
@@ -123,15 +126,6 @@ No* removerArvore(No *no, int valor){
                     no = rotacaoLL(no);
                 }
             }
-    }else if(valor > no->valor){
-        no->dir = removerArvore(no->dir, valor);
-            if(altura(no->esq) - altura(no->dir) >= 2){
-                if(altura(no->esq->dir) <= altura(no->esq->esq))
-                    no = rotacaoLL(no);
-                else
-                    no = rotacaoLR(no);
-            }
-        
     }else if(no->valor == valor){
         if(no->dir == NULL){
             no = NULL;
@@ -147,9 +141,7 @@ No* removerArvore(No *no, int valor){
                     no = rotacaoLR(no);
 
             }
-            return no;
         }
-        return no;
     }
     return no;
 }

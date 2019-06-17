@@ -1,5 +1,6 @@
 typedef struct no No;
 
+void insere(No **no, int valor);
 No* inserirArvore(No *no, int valor);
 
 No* criarNo(int valor);
