@@ -5,17 +5,18 @@
 int main(){
     int i = 0, valor = 0;
 
-    Arvore a = criarArvore();
-    valor = 
+    int verifica = 0;
+    No *n = NULL;
+    Arvore *a = criarArvore();
+
     for(i = 1; i < 10; i++){
         printf("Informe um valor: ");
         scanf("%d", &valor);
-
-        insereAVL(n, valor);
+        n = insereAVL(n, valor);
     }
     
     printf("\nArvore informada: ");
-        imprimirArvore(a, 2);
+        imprimirArvore(n, 2);
 
     system("pause");
     return 0;

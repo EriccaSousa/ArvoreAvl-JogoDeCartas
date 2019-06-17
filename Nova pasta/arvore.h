@@ -12,7 +12,7 @@ int vaziaArvore(Arvore *a);
 
 int cheiaArvore(Arvore *a);
 
-void imprimirArvore(Arvore *a, int ordem);
+void imprimirArvore(No *no, int ordem);
 
 void liberarArvore(Arvore *a);
 
@@ -24,10 +24,11 @@ int calcularBalanceamento(No *no);
 
 int maior(int x, int y);
 
-No *rotacaoLL(No *no);
+No* rotacaoLL(No *no);
 
-No *rotacaoRR(No *no);
+No* rotacaoRR(No *no);
 
-No *rotacaoLR(No *no);
+No* rotacaoLR(No *no);
 
-No *rotacaoRL(No *no);
+No* rotacaoRL(No *no);
+No* insereAVL(No *no, int valor);

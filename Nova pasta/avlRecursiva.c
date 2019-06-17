@@ -16,7 +16,7 @@ struct arvore{
 };
 
 Arvore* criarArvore(){
-    Arvore *a = (Arvore*) malloc(sizeof(Arvore*));
+    Arvore *a = (Arvore*) malloc(sizeof(Arvore));
     a->raiz = NULL;
     return a;
 }
@@ -62,8 +62,8 @@ void imprimir_no(No *n, int ordem){
     }
 }
 
-void imprimirArvore(Arvore *a, int ordem){
-    imprimir_no(a->raiz, ordem);
+void imprimirArvore(No *no, int ordem){
+    imprimir_no(no, ordem);
 }
 
 /*
@@ -226,7 +226,7 @@ int maior(int x, int y){
     else return y;
 }
 
-No *rotacaoRR(No *no){
+No* rotacaoRR(No *no){
     printf("\n ---- Rotacionou RR ---- \n");
 
     No *aux = no->esq;
@@ -234,12 +234,12 @@ No *rotacaoRR(No *no){
     no->esq = aux->dir;
     aux->dir = no;
 
-    no->fatorBal = (maior(altura(no->esq), altura(no->dir)) + 1);
+    no->fatorBal = (maior(altura(no->dir), altura(no->esq)) + 1);
     aux->fatorBal = (maior(altura(no->esq), no->fatorBal) + 1);
     return aux;
 }
 
-No *rotacaoLL(No *no){
+No* rotacaoLL(No *no){
         printf("\n ---- Rotacionou LL ---- \n");
 
     No *aux = no->dir;
@@ -247,13 +247,13 @@ No *rotacaoLL(No *no){
     no->dir = aux->esq;
     aux->esq = no;
 
-    no->fatorBal = (maior(altura(no->esq), altura(no->dir)) + 1);
+    no->fatorBal = (maior(altura(no->dir), altura(no->esq)) + 1);
     aux->fatorBal = (maior(altura(no->dir), no->fatorBal) + 1);
 
     return aux;
 }
 
-No *rotacaoLR(No *no){
+No* rotacaoLR(No *no){
         printf("\n ---- Rotacionou LR ---- \n");
 
     no->esq = rotacaoLL(no->esq);
@@ -261,7 +261,7 @@ No *rotacaoLR(No *no){
     return(rotacaoRR(no));
 }
 
-No *rotacaoRL(No *no){
+No* rotacaoRL(No *no){
             printf("\n ---- Rotacionou RL ---- \n");
 
     no->dir = rotacaoRR(no->dir);
@@ -271,7 +271,7 @@ No *rotacaoRL(No *no){
 
 No* criarNo(int valor){
    
-    No* no = (No*) malloc(sizeof(No));
+    No *no = (No*) malloc(sizeof(No));
    
     if(no == NULL){
         //Alocacao falhou!
@@ -285,34 +285,31 @@ No* criarNo(int valor){
     return no;
 }
 
-int insereAVL(No *no, int valor){
-    int res;
+No* insereAVL(No *no, int valor){
 
     if(no == NULL){
-        criarNo(valor);
+        return criarNo(valor);;
     }
 
     if(valor < no->valor){
-        if((res = insereAVL(no, valor)) == 1){//Se for = 1 a isercao funcionou, e tem q fazer o balanceamento na arvore
-            if(calcularBalanceamento(no) >= 2){
+        no->esq = insereAVL(no->esq, valor);
+            if(altura(no->esq) - altura(no->dir) == 2){
                 if(valor < (no->esq->valor)){
-                    rotacaoLL(no);
+                    no = rotacaoLL(no);
                 }else{
-                    rotacaoLR(no);
+                    no = rotacaoLR(no);
                 }
             }
-        }
     }else{
         if(valor > no->valor){
-            if((res = insereAVL(no, valor)) == 1){
-                if(calcularBalanceamento(no) >= 2){
+            no->dir = insereAVL(no->dir, valor);
+                if(altura(no->dir) - altura(no->esq) == 2){
                     if(no->dir->valor < valor){
-                        rotacaoRR(no);
+                        no = rotacaoRR(no);
                     }else{
-                        rotacaoRL(no);
+                        no = rotacaoRL(no);
                     }
                 }
-            }
         }else{
             printf("\nValor ja existe na arvore!\n");
             return 0;
@@ -320,6 +317,6 @@ int insereAVL(No *no, int valor){
     }
     no->fatorBal = maior(altura(no->esq), altura(no->dir)) + 1;
 
-    return res;
+    return no;
 }
  
