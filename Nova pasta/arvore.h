@@ -34,5 +34,5 @@ No* rotacaoRL(No *no);
 
 No* insereAVL(No *no, int valor);
 
-int removeA(No *no, int valor);
+No* removeA(No *no, int valor);
 int noRaiz(No *n);

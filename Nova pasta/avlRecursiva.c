@@ -113,7 +113,7 @@ void inserirArvore(Arvore *a, int valor){
         }
     }
 }
- */
+ 
 int removerArvore(Arvore *a, int valor){
     if(!vaziaArvore(a)){
         //percorrendo a árvore com temp
@@ -186,6 +186,7 @@ int removerArvore(Arvore *a, int valor){
     
     return(0); // quando está vazia retorna 0
 }
+*/
 
 void liberarArvore(Arvore *a){
     free(a);
@@ -209,51 +210,71 @@ int noRaiz(No *n){
     return n->valor;
 }
 
-int removeA(No *no, int valor){
+No* removeA(No *no, int valor){
     if(no == NULL){
-        return 0;
+        return NULL;
     }
-
-    int res;
+    printf("\nErro aqui 1");
     if(valor < no->valor){
-        if((res = removeA(no->esq, valor)) == 1){
+                printf("\nErro aqui 2");
+            printf("--\nValor no->valor -- %d", no->valor);
+            no->esq = removeA(no->esq, valor);
+                printf("\nErro aqui 3");
+
             if(altura(no->esq) - altura(no->dir) == 2){
-                if(altura(no->dir->esq) <= altura(no->dir->dir))
-                    rotacaoRR(no);
-                else
-                    rotacaoLL(no);
+                    printf("\nErro aqui 4");
+
+                if(altura(no->dir->esq) <= altura(no->dir->dir)){
+                        printf("\nErro aqui 5");
+                        no = rotacaoRR(no);
+
+
+                }
+                else{
+                    printf("\nErro aqui 6");
+
+                    no = rotacaoLL(no);
+
+                }
             }
-        }
-    }
-    if(valor > no->valor){
-        if((res = removeA(no->dir, valor)) == 1){
-            if(altura(no->esq) - altura(no->dir) == 2){
+    }else if(valor > no->valor){
+        no->dir = removeA(no->dir, valor);
+            if(altura(no->esq) - altura(no->dir) >= 2){
                 if(altura(no->esq->dir) <= altura(no->esq->esq))
-                    rotacaoLL(no);
+                    no = rotacaoLL(no);
                 else
-                    rotacaoLR(no);
+                    no = rotacaoLR(no);
             }
-        }
-    }
-    if(no->valor == valor){
+        
+    }else if(no->valor == valor){
         if(no->dir == NULL || no->esq == NULL){
+            printf("\n estou aqui10");
             No *ant_no = no;
             if(no->esq != NULL)
                 no = no->esq;
             else
                 no = no->dir; 
+            printf("\n estou aqui11");
+
         }else{
+            printf("\n estou aqui12");
+
             no->valor = busca_menor(no->dir);
-            removeA(no->dir, no->valor);
+            no->dir = removeA(no->dir, no->valor);
+                        printf("\n estou aqui13");
+
             if(altura(no->esq) - altura(no->dir) == 2){
                 if(altura(no->esq->dir) <= altura(no->esq->esq))
-                    rotacaoLL(no);
+                    no = rotacaoLL(no);
                 else
-                    rotacaoLR(no);
+                    no = rotacaoLR(no);
+            printf("\n estou aqui14");
+
             }
-            return 1;
+            return no;
         }
-        return res;
+        printf("\n Estou aqui 15");
+        return no;
     }
 }
  

@@ -18,12 +18,11 @@ int main(){
     printf("\nArvore informada: ");
         imprimirArvore(n, 2);
 
-    int res = 0;
     printf("\n ---- valor no raiz: %d ----", noRaiz(n));
     for(int i = 0; i < 4; i++){
         valor = busca_menor(n);
         printf("\nValor: %d", valor);
-        res = removeA(n, valor);
+        n = removeA(n, valor);
         printf("\n Arvore removida %d\n", i);
         imprimirArvore(n, 2);
     }
