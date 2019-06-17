@@ -9,7 +9,7 @@ int main(){
     No *n = NULL;
     Arvore *a = criarArvore();
 
-    for(i = 1; i < 10; i++){
+    for(i = 1; i < 5; i++){
         printf("Informe um valor: ");
         scanf("%d", &valor);
         n = insereAVL(n, valor);
@@ -18,6 +18,15 @@ int main(){
     printf("\nArvore informada: ");
         imprimirArvore(n, 2);
 
+    int res = 0;
+    printf("\n ---- valor no raiz: %d ----", noRaiz(n));
+    for(int i = 0; i < 4; i++){
+        valor = busca_menor(n);
+        printf("\nValor: %d", valor);
+        res = removeA(n, valor);
+        printf("\n Arvore removida %d\n", i);
+        imprimirArvore(n, 2);
+    }
     system("pause");
     return 0;
 }

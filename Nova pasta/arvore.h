@@ -16,7 +16,7 @@ void imprimirArvore(No *no, int ordem);
 
 void liberarArvore(Arvore *a);
 
-int busca_menor(Arvore *a);
+int busca_menor(No *no);
 
 int altura(No *no);
 
@@ -31,4 +31,8 @@ No* rotacaoRR(No *no);
 No* rotacaoLR(No *no);
 
 No* rotacaoRL(No *no);
+
 No* insereAVL(No *no, int valor);
+
+int removeA(No *no, int valor);
+int noRaiz(No *n);

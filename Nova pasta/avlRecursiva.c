@@ -192,14 +192,11 @@ void liberarArvore(Arvore *a){
 }
 
 
-int busca_menor(Arvore *a){
-    int menor = a->raiz->valor;
-    No *temp = a->raiz;
+int busca_menor(No *no){
+    int menor = no->valor;
+    No *temp = no;
     No *ant = NULL;
 
-    if(vaziaArvore(a)){
-        return -1;
-    }
     while(temp->esq != NULL){
       
         temp = temp->esq;
@@ -208,6 +205,57 @@ int busca_menor(Arvore *a){
     return menor;
 }
 
+int noRaiz(No *n){
+    return n->valor;
+}
+
+int removeA(No *no, int valor){
+    if(no == NULL){
+        return 0;
+    }
+
+    int res;
+    if(valor < no->valor){
+        if((res = removeA(no->esq, valor)) == 1){
+            if(altura(no->esq) - altura(no->dir) == 2){
+                if(altura(no->dir->esq) <= altura(no->dir->dir))
+                    rotacaoRR(no);
+                else
+                    rotacaoLL(no);
+            }
+        }
+    }
+    if(valor > no->valor){
+        if((res = removeA(no->dir, valor)) == 1){
+            if(altura(no->esq) - altura(no->dir) == 2){
+                if(altura(no->esq->dir) <= altura(no->esq->esq))
+                    rotacaoLL(no);
+                else
+                    rotacaoLR(no);
+            }
+        }
+    }
+    if(no->valor == valor){
+        if(no->dir == NULL || no->esq == NULL){
+            No *ant_no = no;
+            if(no->esq != NULL)
+                no = no->esq;
+            else
+                no = no->dir; 
+        }else{
+            no->valor = busca_menor(no->dir);
+            removeA(no->dir, no->valor);
+            if(altura(no->esq) - altura(no->dir) == 2){
+                if(altura(no->esq->dir) <= altura(no->esq->esq))
+                    rotacaoLL(no);
+                else
+                    rotacaoLR(no);
+            }
+            return 1;
+        }
+        return res;
+    }
+}
  
 int altura(No *no) {
   if(no == NULL){
@@ -217,54 +265,51 @@ int altura(No *no) {
   }
 }
 
-int calcularBalanceamento(No *no){
-    return labs(altura(no->esq) - altura(no->dir));
-}
-
 int maior(int x, int y){
     if(x > y) return x;
     else return y;
 }
 
-No* rotacaoRR(No *no){
+No* rotacaoLL(No *no){
     printf("\n ---- Rotacionou RR ---- \n");
 
     No *aux = no->esq;
-
     no->esq = aux->dir;
     aux->dir = no;
-
+printf("\nAqui 13\n");
     no->fatorBal = (maior(altura(no->dir), altura(no->esq)) + 1);
+
     aux->fatorBal = (maior(altura(no->esq), no->fatorBal) + 1);
+    printf("\nAqui 14\n");
     return aux;
 }
 
-No* rotacaoLL(No *no){
+No* rotacaoRR(No *no){
         printf("\n ---- Rotacionou LL ---- \n");
 
     No *aux = no->dir;
-
     no->dir = aux->esq;
     aux->esq = no;
-
+printf("\nAqui 10\n");
     no->fatorBal = (maior(altura(no->dir), altura(no->esq)) + 1);
     aux->fatorBal = (maior(altura(no->dir), no->fatorBal) + 1);
-
+printf("\nAqui 11\n");
+    
     return aux;
 }
 
-No* rotacaoLR(No *no){
+No* rotacaoRL(No *no){
         printf("\n ---- Rotacionou LR ---- \n");
 
-    no->esq = rotacaoLL(no->esq);
+    no->dir = rotacaoLL(no->dir);
 
     return(rotacaoRR(no));
 }
 
-No* rotacaoRL(No *no){
+No* rotacaoLR(No *no){
             printf("\n ---- Rotacionou RL ---- \n");
 
-    no->dir = rotacaoRR(no->dir);
+    no->esq = rotacaoRR(no->esq);
 
     return(rotacaoLL(no));
 }
@@ -291,32 +336,37 @@ No* insereAVL(No *no, int valor){
         return criarNo(valor);;
     }
 
-    if(valor < no->valor){
+    if(valor <= no->valor){
         no->esq = insereAVL(no->esq, valor);
             if(altura(no->esq) - altura(no->dir) == 2){
                 if(valor < (no->esq->valor)){
+                    printf("\nAqui 1\n");
                     no = rotacaoLL(no);
+                    printf("\nAqui 2\n");
                 }else{
+                    printf("\nAqui 3\n");
                     no = rotacaoLR(no);
+                    printf("\nAqui 4\n");
                 }
             }
     }else{
-        if(valor > no->valor){
+        if(valor >= no->valor){
             no->dir = insereAVL(no->dir, valor);
                 if(altura(no->dir) - altura(no->esq) == 2){
                     if(no->dir->valor < valor){
+                        printf("\nAqui 5\n");
                         no = rotacaoRR(no);
+                        printf("\nAqui 6\n");
                     }else{
+                        printf("\nAqui 7\n");
                         no = rotacaoRL(no);
+                        printf("\nAqui 8\n");
                     }
                 }
-        }else{
-            printf("\nValor ja existe na arvore!\n");
-            return 0;
         }
     }
     no->fatorBal = maior(altura(no->esq), altura(no->dir)) + 1;
-
+    printf("\nAqui 9\n");
     return no;
 }
  
