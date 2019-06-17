@@ -6,7 +6,7 @@
 
 
 typedef struct jogador{
-    Arvore *a;
+    No *no;
     int vitorias;
     int vitorias_partidas;
 }Jogador;
@@ -30,7 +30,7 @@ Lista* lista_cartas(){
 Jogador criar_jogador(){
     Jogador jogador;
     
-    jogador.a = criarArvore();
+    jogador.no = NULL;
     jogador.vitorias = 0;
     return jogador;
 }
@@ -41,8 +41,8 @@ void partida(Jogador jog[3]){
     
     for(int y = 0; y < 3; y++){
         printf("\nJogador %d ", y + 1);
-        menor[y] = busca_menor(jog[y].a);
-        removerArvore(jog[y].a, menor[y]);
+        menor[y] = busca_menor(jog[y].no);
+        removerArvore(jog[y].no, menor[y]);
         printf("Jogou a carta: %d", menor[y]);
     }
 
@@ -93,14 +93,14 @@ void jogo(Jogador jog[3]){
             num = rand() % qtd_elemLista(l);
             carta = removerLista(l, num);
 
-            inserirArvore(jog[i].a, carta);
+            inserirArvore(jog[i].no, carta);
         }
     }
 
     for(int i = 0; i < 3; i++){
         printf("\nJogador %d: ", i);
         
-        imprimirArvore(jog[i].a, 2);
+        imprimirArvore(jog[i].no, 2);
     }
     for(int i = 0; i < 10; i++){
         printf("\n ------ Rodada %d ------", i+1);

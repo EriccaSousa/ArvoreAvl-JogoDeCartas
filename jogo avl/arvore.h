@@ -1,20 +1,18 @@
-typedef struct arvore Arvore;
-
 typedef struct no No;
 
-Arvore* criarArvore();
+No* inserirArvore(No *no, int valor);
 
-void inserirArvore(Arvore *a, int valor);
+No* criarNo(int valor);
 
-int removerArvore(Arvore *a, int valor);
+No* removerArvore(No *no, int valor);
 
-int vaziaArvore(Arvore *a);
+int vaziaArvore(No *no);
 
-int cheiaArvore(Arvore *a);
+int cheiaArvore(No *no);
 
 void imprimirArvore(No *no, int ordem);
 
-void liberarArvore(Arvore *a);
+void liberarArvore(No *no);
 
 int busca_menor(No *no);
 
@@ -32,7 +30,5 @@ No* rotacaoLR(No *no);
 
 No* rotacaoRL(No *no);
 
-No* insereAVL(No *no, int valor);
 
-No* removeA(No *no, int valor);
 int noRaiz(No *n);
