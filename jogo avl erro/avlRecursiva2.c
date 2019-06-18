@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "arvore.h"
+#include "arvore2.h"
 #define ESQUERDA 1
 #define DIREITA 2
 
@@ -76,8 +76,17 @@ int noRaiz(No *n){
     return n->valor;
 }
 
-void insere(No **no, int valor){
-    *no = inserirArvore(*no, valor);
+int buscaValor(No *no, int valor){
+    No *temp = no;
+    while(temp->esq != NULL){
+        if(temp->valor < valor)
+            temp = temp->dir;
+        else if(temp->valor > valor)
+            temp = temp->esq;
+        else if(temp->valor == valor)
+            return 1;
+    }
+    return 0;
 }
 
 No* inserirArvore(No *no, int valor){
@@ -86,7 +95,7 @@ No* inserirArvore(No *no, int valor){
         return criarNo(valor);
     }
 
-    if(valor <= no->valor){
+    if(valor < no->valor){
         no->esq = inserirArvore(no->esq, valor);
             if(altura(no->esq) - altura(no->dir) == 2){
                 if(valor < (no->esq->valor)){
@@ -95,8 +104,7 @@ No* inserirArvore(No *no, int valor){
                     no = rotacaoLR(no);
                 }
             }
-    }else{
-        if(valor >= no->valor){
+    }else if(valor > no->valor){
             no->dir = inserirArvore(no->dir, valor);
                 if(altura(no->dir) - altura(no->esq) == 2){
                     if(no->dir->valor < valor){
@@ -105,8 +113,10 @@ No* inserirArvore(No *no, int valor){
                         no = rotacaoRL(no);
                     }
                 }
-        }
+    }else{
+        return NULL;
     }
+    
     no->fatorBal = maior(altura(no->esq), altura(no->dir)) + 1;
     return no;
 }
@@ -126,6 +136,15 @@ No* removerArvore(No *no, int valor){
                     no = rotacaoLL(no);
                 }
             }
+    }else if(valor > no->valor){
+        no->dir = removerArvore(no->dir, valor);
+            if(altura(no->esq) - altura(no->dir) >= 2){
+                if(altura(no->esq->dir) <= altura(no->esq->esq))
+                    no = rotacaoLL(no);
+                else
+                    no = rotacaoLR(no);
+            }
+        
     }else if(no->valor == valor){
         if(no->dir == NULL){
             no = NULL;
@@ -139,9 +158,10 @@ No* removerArvore(No *no, int valor){
                     no = rotacaoLL(no);
                 else
                     no = rotacaoLR(no);
-
             }
+            return no;
         }
+        return no;
     }
     return no;
 }

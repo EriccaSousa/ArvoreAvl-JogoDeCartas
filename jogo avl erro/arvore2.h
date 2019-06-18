@@ -1,9 +1,12 @@
 typedef struct no No;
 
 void insere(No **no, int valor);
+
 No* inserirArvore(No *no, int valor);
 
 No* criarNo(int valor);
+
+int buscaValor(No *no, int valor);
 
 No* removerArvore(No *no, int valor);
 

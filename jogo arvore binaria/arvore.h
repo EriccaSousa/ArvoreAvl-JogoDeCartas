@@ -20,7 +20,7 @@ int busca_menor(Arvore *a);
 
 int altura(No *no);
 
-int calcularBalanceamento(No *no);
+int calcularBalanceamento(Arvore *a);
 
 int maior(int x, int y);
 

@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "arvore.h"
+#include "arvore2.h"
 
 int main(){
     int i = 0, valor = 0;
 
     int verifica = 0;
-    No *n = NULL;    
+    No *n = NULL;
     for(i = 0; i < 8; i++){
         printf("Informe um valor: ");
         scanf("%d", &valor);
         n = inserirArvore(n, valor);
     }
-    
+
     printf("\nArvore informada: ");
         imprimirArvore(n, 2);
 
